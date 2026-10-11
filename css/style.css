@@ -619,14 +619,16 @@ section { padding: 120px 0; }
   }
   .nav-links.open { right: 0; }
   .services-grid { grid-template-columns: 1fr; }
-  .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
+  .gallery { display: block; columns: 2; column-gap: 10px; }
+  .gallery-item { margin-bottom: 10px; break-inside: avoid; height: auto; }
+  .gallery-item picture,
+  .gallery-item img { height: auto; }
+  .gallery-empty { column-span: all; }
   section { padding: 80px 0; }
   .stats { gap: 28px; }
 }
 
 @media (max-width: 480px) {
-  .gallery { grid-template-columns: 1fr; }
-  .gallery-item.tall { grid-row: span 1; }
   .lightbox-prev, .lightbox-next { padding: 6px; font-size: 1.2rem; }
   .lightbox-close { top: 16px; right: 18px; }
 }

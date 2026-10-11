@@ -42,7 +42,8 @@ function slugify(name) {
 }
 
 function toCaption(basename) {
-  const words = basename.replace(/[-_]+/g, ' ').trim().split(/\s+/);
+  const withoutCounter = basename.replace(/\s*\(\d+\)\s*$/, '');
+  const words = withoutCounter.replace(/[-_]+/g, ' ').trim().split(/\s+/);
   return words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 }
 
