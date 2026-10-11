@@ -1,0 +1,15 @@
+{
+  "name": "rtr-visuals-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio-Website für Konzert-, Band- und Portraitfotografie.",
+  "scripts": {
+    "build:images": "node scripts/build-images.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.5"
+  },
+  "allowScripts": {
+    "sharp@0.33.5": true
+  }
+}

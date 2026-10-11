@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTR VISUALS — Konzert- &amp; Portraitfotografie</title>
+<meta name="description" content="Portfolio für Konzert-, Band- und Portraitfotografie.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header" id="header">
+  <nav class="nav container">
+    <a href="#home" class="logo">RTR<span>.</span>VISUALS</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+      <li><a href="#about" class="nav-link">Über mich</a></li>
+      <li><a href="#services" class="nav-link">Angebote</a></li>
+      <li><a href="#contact" class="nav-link">Kontakt</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow reveal">Konzert · Band · Portrait</p>
+      <h1 class="reveal">Momente,<br>die den Beat treffen.</h1>
+      <p class="hero-sub reveal">Fotografie zwischen Bühnenlicht und Rampenlicht — authentisch, dynamisch, mit Blick fürs Detail.</p>
+      <a href="#portfolio" class="btn reveal">Portfolio ansehen</a>
+    </div>
+    <a href="#portfolio" class="scroll-hint" aria-label="Nach unten scrollen"><span></span>Scroll</a>
+  </section>
+
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-heading reveal">
+        <span class="tag">Portfolio</span>
+        <h2>Ausgewählte Arbeiten</h2>
+      </div>
+
+      <div class="filters reveal">
+        <button class="filter-btn active" data-filter="all">Alle</button>
+        <button class="filter-btn" data-filter="konzert">Konzert</button>
+        <button class="filter-btn" data-filter="band">Band</button>
+        <button class="filter-btn" data-filter="portrait">Portrait</button>
+      </div>
+
+      <div class="gallery" id="gallery">
+        <!-- GALLERY:START -->
+        <p class="gallery-empty">Noch keine Bilder vorhanden. Lege Fotos in <code>images-src/konzert</code>, <code>images-src/band</code> bzw. <code>images-src/portrait</code> ab und führe <code>npm run build:images</code> aus.</p>
+        <!-- GALLERY:END -->
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container about-grid">
+      <div class="about-image reveal">
+        <!-- ABOUT:START -->
+        <div class="img-placeholder img-missing"></div>
+        <!-- ABOUT:END -->
+      </div>
+      <div class="about-text reveal">
+        <span class="tag">Über mich</span>
+        <h2>Hinter der Kamera</h2>
+        <p>Ich bin Paul, unterwegs als RTR Visuals — mit Leidenschaft für Livemusik und Menschen. Seit Jahren begleite ich Konzerte, Bands und Shootings — immer auf der Suche nach dem einen Moment, der die Energie einer Show oder die Persönlichkeit eines Menschen einfängt.</p>
+        <p>Mein Stil: reduziert, kontrastreich, ehrlich. Kein unnötiger Schnickschnack — nur das Bild, das für sich spricht.</p>
+        <ul class="stats">
+          <li><strong>50+</strong><span>Konzerte</span></li>
+          <li><strong>30+</strong><span>Bands</span></li>
+          <li><strong>100+</strong><span>Portraits</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-heading center reveal">
+        <span class="tag">Angebote</span>
+        <h2>Was ich anbiete</h2>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <h3>Konzertfotografie</h3>
+          <p>Live-Mitschnitte von Shows und Festivals — dynamisch, im richtigen Moment, mit Gespür für Bühnenlicht.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Bandfotografie</h3>
+          <p>Pressefotos, Album-Artwork und Bandportraits im Studio oder On-Location für euren nächsten Release.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+          </div>
+          <h3>Portraitfotografie</h3>
+          <p>Individuelle Portraitshootings — für Business, Bewerbung oder einfach für dich selbst.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-text reveal">
+        <span class="tag">Kontakt</span>
+        <h2>Lass uns etwas gestalten</h2>
+        <p>Du planst ein Konzert, brauchst Bandfotos oder ein Portraitshooting? Schreib mir — ich freue mich auf deine Nachricht.</p>
+        <div class="contact-info">
+          <a href="mailto:kontakt@rtrvisuals.de">kontakt@rtrvisuals.de</a>
+          <a href="https://instagram.com/_rtr.visuals_" target="_blank" rel="noopener noreferrer">@_rtr.visuals_</a>
+          <span>Berlin, Deutschland</span>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-row">
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-row">
+          <label for="subject">Anfrage</label>
+          <select id="subject" name="subject">
+            <option value="konzert">Konzertfotografie</option>
+            <option value="band">Bandfotografie</option>
+            <option value="portrait">Portraitfotografie</option>
+            <option value="sonstiges">Sonstiges</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="message">Nachricht</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn">Nachricht senden</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <span>&copy; <span id="year"></span> RTR Visuals Photography</span>
+    <div class="socials">
+      <a href="https://instagram.com/_rtr.visuals_" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </a>
+      <a href="mailto:kontakt@rtrvisuals.de" aria-label="E-Mail">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+      </a>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Schließen">&times;</button>
+  <button class="lightbox-prev" id="lightboxPrev" aria-label="Vorheriges Bild">&#10094;</button>
+  <div class="lightbox-content">
+    <img src="" alt="" id="lightboxImg">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+  <button class="lightbox-next" id="lightboxNext" aria-label="Nächstes Bild">&#10095;</button>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
