@@ -324,6 +324,25 @@ section { padding: 120px 0; }
 
 .gallery-page { padding-top: 150px; }
 
+.heading-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px 32px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+}
+.heading-row .section-heading { margin-bottom: 0; }
+
+.text-link {
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--accent);
+  transition: color var(--transition);
+}
+.text-link:hover { color: var(--accent); }
+
 .section-cta {
   text-align: center;
   margin-top: 56px;
