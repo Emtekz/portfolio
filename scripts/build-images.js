@@ -25,6 +25,7 @@ const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff', '.
 
 const THUMB_WIDTH = 800;
 const LARGE_WIDTH = 1920;
+const HERO_MOBILE_WIDTH = 900;
 const WEBP_QUALITY = { thumb: 75, large: 82 };
 const JPG_QUALITY = { thumb: 75, large: 82 };
 
@@ -164,6 +165,18 @@ function buildGalleryHtml(entries, emptyHint) {
   }).join('\n\n');
 }
 
+function buildHeroHtml(hero) {
+  if (!hero) return '';
+  const { desktop, mobile } = hero;
+  return `    <picture class="hero-image">
+      <source media="(max-width: 720px)" type="image/webp" srcset="${mobile.webp}">
+      <source media="(max-width: 720px)" srcset="${mobile.jpg}">
+      <source type="image/webp" srcset="${desktop.webp}">
+      <img src="${desktop.jpg}" alt="" fetchpriority="high" width="${desktop.width}" height="${desktop.height}">
+    </picture>
+    <div class="hero-overlay"></div>`;
+}
+
 function buildAboutHtml(about) {
   if (!about) return '        <div class="img-placeholder img-missing"></div>';
   return `        <div class="img-placeholder">
@@ -182,6 +195,26 @@ function injectBetweenMarkers(html, marker, replacement, fileName) {
     throw new Error(`Marker ${start} / ${end} nicht in ${fileName} gefunden.`);
   }
   return html.replace(pattern, () => `${start}\n${replacement}\n        ${end}`);
+}
+
+async function processHero() {
+  const srcDir = path.join(SRC_DIR, 'hero');
+  const outDir = path.join(OUT_DIR, 'hero');
+  const files = listImageFiles(srcDir);
+  if (files.length === 0) return null;
+
+  if (files.length > 1) {
+    console.warn(`  Hinweis: mehrere Dateien in images-src/hero/ gefunden, verwende "${files[0]}".`);
+  }
+
+  fs.mkdirSync(outDir, { recursive: true });
+  const inputPath = path.join(srcDir, files[0]);
+  const quality = { webp: WEBP_QUALITY.large, jpg: JPG_QUALITY.large };
+  const desktop = await renderVariant(inputPath, path.join(outDir, 'hero-large'), LARGE_WIDTH, quality);
+  const mobile = await renderVariant(inputPath, path.join(outDir, 'hero-mobile'), HERO_MOBILE_WIDTH, quality);
+
+  console.log(`  hero/${files[0]} -> hero-large, hero-mobile (${fmtKB(fs.statSync(inputPath).size)} -> ${fmtKB(desktop.outBytes + mobile.outBytes)})`);
+  return { desktop, mobile };
 }
 
 async function main() {
@@ -211,6 +244,11 @@ async function main() {
   if (highlights.count === 0) console.log('  (keine Bilder gefunden)');
   console.log('');
 
+  console.log('hero:');
+  const hero = await processHero();
+  if (!hero) console.log('  (kein Bild gefunden)');
+  console.log('');
+
   console.log('about:');
   const about = await processAbout();
   if (!about) console.log('  (kein Bild gefunden)');
@@ -219,6 +257,7 @@ async function main() {
   let indexHtml = fs.readFileSync(INDEX_HTML, 'utf8');
   indexHtml = injectBetweenMarkers(indexHtml, 'HIGHLIGHTS', buildGalleryHtml(highlights.entries,
     'Lege Fotos in <code>images-src/highlights</code> ab'), 'index.html');
+  indexHtml = injectBetweenMarkers(indexHtml, 'HERO', buildHeroHtml(hero), 'index.html');
   indexHtml = injectBetweenMarkers(indexHtml, 'ABOUT', buildAboutHtml(about), 'index.html');
   fs.writeFileSync(INDEX_HTML, indexHtml);
 
