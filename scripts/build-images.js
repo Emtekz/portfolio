@@ -1,6 +1,6 @@
 // Liest Rohfotos aus images-src/<kategorie>/, verkleinert & komprimiert sie
 // (WebP + JPEG, in Vorschau- und Großansicht-Größe) nach images/<kategorie>/
-// und schreibt das fertige Galerie-HTML direkt in index.html zwischen den
+// und schreibt das fertige HTML in index.html (Highlights) und gallery.html zwischen den
 // Markern <!-- GALLERY:START --> / <!-- GALLERY:END --> bzw.
 // <!-- ABOUT:START --> / <!-- ABOUT:END -->.
 //
@@ -17,6 +17,7 @@ const ROOT = path.resolve(__dirname, '..');
 const SRC_DIR = path.join(ROOT, 'images-src');
 const OUT_DIR = path.join(ROOT, 'images');
 const INDEX_HTML = path.join(ROOT, 'index.html');
+const GALLERY_HTML = path.join(ROOT, 'gallery.html');
 
 const CATEGORIES = ['konzert', 'band', 'portrait'];
 const CATEGORY_LABELS = { konzert: 'Konzert', band: 'Band', portrait: 'Portrait' };
@@ -143,21 +144,22 @@ function interleave(queues) {
   return merged;
 }
 
-function buildGalleryHtml(entries) {
+function buildGalleryHtml(entries, emptyHint) {
   if (entries.length === 0) {
-    return '        <p class="gallery-empty">Noch keine Bilder vorhanden. Lege Fotos in <code>images-src/konzert</code>, <code>images-src/band</code> bzw. <code>images-src/portrait</code> ab und führe <code>npm run build:images</code> aus.</p>';
+    return `        <p class="gallery-empty">Noch keine Bilder vorhanden. ${emptyHint} und führe <code>npm run build:images</code> aus.</p>`;
   }
 
   return entries.map(({ category, caption, thumb, large }) => {
     const tall = large.height / large.width > 1.15 ? ' tall' : '';
     const label = CATEGORY_LABELS[category];
+    const labelHtml = label ? `<span>${label}</span>` : '';
     const alt = escapeHtml(caption);
     return `        <figure class="gallery-item${tall} reveal" data-category="${category}" data-large-jpg="${large.jpg}" data-large-webp="${large.webp}">
           <picture>
             <source type="image/webp" srcset="${thumb.webp}">
             <img src="${thumb.jpg}" alt="${alt}" loading="lazy" width="${thumb.width}" height="${thumb.height}">
           </picture>
-          <figcaption class="gallery-overlay"><span>${label}</span><p>${alt}</p></figcaption>
+          <figcaption class="gallery-overlay">${labelHtml}<p>${alt}</p></figcaption>
         </figure>`;
   }).join('\n\n');
 }
@@ -172,14 +174,14 @@ function buildAboutHtml(about) {
         </div>`;
 }
 
-function injectBetweenMarkers(html, marker, replacement) {
+function injectBetweenMarkers(html, marker, replacement, fileName) {
   const start = `<!-- ${marker}:START -->`;
   const end = `<!-- ${marker}:END -->`;
   const pattern = new RegExp(`${start}[\\s\\S]*?${end}`);
   if (!pattern.test(html)) {
-    throw new Error(`Marker ${start} / ${end} nicht in index.html gefunden.`);
+    throw new Error(`Marker ${start} / ${end} nicht in ${fileName} gefunden.`);
   }
-  return html.replace(pattern, `${start}\n${replacement}\n        ${end}`);
+  return html.replace(pattern, () => `${start}\n${replacement}\n        ${end}`);
 }
 
 async function main() {
@@ -201,18 +203,31 @@ async function main() {
     console.log('');
   }
 
+  console.log('highlights:');
+  const highlights = await processCategory('highlights');
+  totalOriginal += highlights.originalBytes;
+  totalOutput += highlights.outputBytes;
+  totalCount += highlights.count;
+  if (highlights.count === 0) console.log('  (keine Bilder gefunden)');
+  console.log('');
+
   console.log('about:');
   const about = await processAbout();
   if (!about) console.log('  (kein Bild gefunden)');
   console.log('');
 
-  const merged = interleave(queues);
-  let html = fs.readFileSync(INDEX_HTML, 'utf8');
-  html = injectBetweenMarkers(html, 'GALLERY', buildGalleryHtml(merged));
-  html = injectBetweenMarkers(html, 'ABOUT', buildAboutHtml(about));
-  fs.writeFileSync(INDEX_HTML, html);
+  let indexHtml = fs.readFileSync(INDEX_HTML, 'utf8');
+  indexHtml = injectBetweenMarkers(indexHtml, 'HIGHLIGHTS', buildGalleryHtml(highlights.entries,
+    'Lege Fotos in <code>images-src/highlights</code> ab'), 'index.html');
+  indexHtml = injectBetweenMarkers(indexHtml, 'ABOUT', buildAboutHtml(about), 'index.html');
+  fs.writeFileSync(INDEX_HTML, indexHtml);
 
-  console.log(`Fertig: ${totalCount} Galerie-Bild(er) verarbeitet, index.html aktualisiert.`);
+  let galleryHtml = fs.readFileSync(GALLERY_HTML, 'utf8');
+  galleryHtml = injectBetweenMarkers(galleryHtml, 'GALLERY', buildGalleryHtml(interleave(queues),
+    'Lege Fotos in <code>images-src/konzert</code>, <code>images-src/band</code> bzw. <code>images-src/portrait</code> ab'), 'gallery.html');
+  fs.writeFileSync(GALLERY_HTML, galleryHtml);
+
+  console.log(`Fertig: ${totalCount} Bild(er) verarbeitet, index.html und gallery.html aktualisiert.`);
   if (totalOriginal > 0) {
     const savedPct = (100 * (1 - totalOutput / totalOriginal)).toFixed(0);
     console.log(`Größe gesamt: ${fmtKB(totalOriginal)} -> ${fmtKB(totalOutput)} (${savedPct}% kleiner)`);

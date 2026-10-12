@@ -21,7 +21,8 @@
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="nav-link">Home</a></li>
-      <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+      <li><a href="#portfolio" class="nav-link">Highlights</a></li>
+      <li><a href="gallery.html">Galerie</a></li>
       <li><a href="#about" class="nav-link">Über mich</a></li>
       <li><a href="#services" class="nav-link">Angebote</a></li>
       <li><a href="#contact" class="nav-link">Kontakt</a></li>
@@ -45,227 +46,64 @@
   <section class="portfolio" id="portfolio">
     <div class="container">
       <div class="section-heading reveal">
-        <span class="tag">Portfolio</span>
+        <span class="tag">Highlights</span>
         <h2>Ausgewählte Arbeiten</h2>
       </div>
 
-      <div class="filters reveal">
-        <button class="filter-btn active" data-filter="all">Alle</button>
-        <button class="filter-btn" data-filter="konzert">Konzert</button>
-        <button class="filter-btn" data-filter="band">Band</button>
-        <button class="filter-btn" data-filter="portrait">Portrait</button>
+      <div class="gallery" id="gallery">
+        <!-- HIGHLIGHTS:START -->
+        <figure class="gallery-item reveal" data-category="highlights" data-large-jpg="images/highlights/bockl-blech-large.jpg" data-large-webp="images/highlights/bockl-blech-large.webp">
+          <picture>
+            <source type="image/webp" srcset="images/highlights/bockl-blech-thumb.webp">
+            <img src="images/highlights/bockl-blech-thumb.jpg" alt="Bockl Blech" loading="lazy" width="800" height="533">
+          </picture>
+          <figcaption class="gallery-overlay"><p>Bockl Blech</p></figcaption>
+        </figure>
+
+        <figure class="gallery-item tall reveal" data-category="highlights" data-large-jpg="images/highlights/old-boy-and-the-rocking-guys-large.jpg" data-large-webp="images/highlights/old-boy-and-the-rocking-guys-large.webp">
+          <picture>
+            <source type="image/webp" srcset="images/highlights/old-boy-and-the-rocking-guys-thumb.webp">
+            <img src="images/highlights/old-boy-and-the-rocking-guys-thumb.jpg" alt="Old Boy And The Rocking Guys" loading="lazy" width="800" height="1200">
+          </picture>
+          <figcaption class="gallery-overlay"><p>Old Boy And The Rocking Guys</p></figcaption>
+        </figure>
+
+        <figure class="gallery-item tall reveal" data-category="highlights" data-large-jpg="images/highlights/rcz-large.jpg" data-large-webp="images/highlights/rcz-large.webp">
+          <picture>
+            <source type="image/webp" srcset="images/highlights/rcz-thumb.webp">
+            <img src="images/highlights/rcz-thumb.jpg" alt="RCZ" loading="lazy" width="800" height="1200">
+          </picture>
+          <figcaption class="gallery-overlay"><p>RCZ</p></figcaption>
+        </figure>
+
+        <figure class="gallery-item tall reveal" data-category="highlights" data-large-jpg="images/highlights/rotzloeffl-large.jpg" data-large-webp="images/highlights/rotzloeffl-large.webp">
+          <picture>
+            <source type="image/webp" srcset="images/highlights/rotzloeffl-thumb.webp">
+            <img src="images/highlights/rotzloeffl-thumb.jpg" alt="Rotzloeffl" loading="lazy" width="800" height="1200">
+          </picture>
+          <figcaption class="gallery-overlay"><p>Rotzloeffl</p></figcaption>
+        </figure>
+
+        <figure class="gallery-item reveal" data-category="highlights" data-large-jpg="images/highlights/timeless-large.jpg" data-large-webp="images/highlights/timeless-large.webp">
+          <picture>
+            <source type="image/webp" srcset="images/highlights/timeless-thumb.webp">
+            <img src="images/highlights/timeless-thumb.jpg" alt="Timeless" loading="lazy" width="800" height="533">
+          </picture>
+          <figcaption class="gallery-overlay"><p>Timeless</p></figcaption>
+        </figure>
+
+        <figure class="gallery-item tall reveal" data-category="highlights" data-large-jpg="images/highlights/vogelfrey-large.jpg" data-large-webp="images/highlights/vogelfrey-large.webp">
+          <picture>
+            <source type="image/webp" srcset="images/highlights/vogelfrey-thumb.webp">
+            <img src="images/highlights/vogelfrey-thumb.jpg" alt="Vogelfrey" loading="lazy" width="800" height="1200">
+          </picture>
+          <figcaption class="gallery-overlay"><p>Vogelfrey</p></figcaption>
+        </figure>
+        <!-- HIGHLIGHTS:END -->
       </div>
 
-      <div class="gallery" id="gallery">
-        <!-- GALLERY:START -->
-        <figure class="gallery-item reveal" data-category="konzert" data-large-jpg="images/konzert/old-boy-and-the-rocking-guys-1-large.jpg" data-large-webp="images/konzert/old-boy-and-the-rocking-guys-1-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/old-boy-and-the-rocking-guys-1-thumb.webp">
-            <img src="images/konzert/old-boy-and-the-rocking-guys-1-thumb.jpg" alt="Old Boy And The Rocking Guys" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Old Boy And The Rocking Guys</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="band" data-large-jpg="images/band/bockl-blech-1-large.jpg" data-large-webp="images/band/bockl-blech-1-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/band/bockl-blech-1-thumb.webp">
-            <img src="images/band/bockl-blech-1-thumb.jpg" alt="Bockl Blech" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Band</span><p>Bockl Blech</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/old-boy-and-the-rocking-guys-2-large.jpg" data-large-webp="images/konzert/old-boy-and-the-rocking-guys-2-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/old-boy-and-the-rocking-guys-2-thumb.webp">
-            <img src="images/konzert/old-boy-and-the-rocking-guys-2-thumb.jpg" alt="Old Boy And The Rocking Guys" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Old Boy And The Rocking Guys</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="band" data-large-jpg="images/band/bockl-blech-2-large.jpg" data-large-webp="images/band/bockl-blech-2-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/band/bockl-blech-2-thumb.webp">
-            <img src="images/band/bockl-blech-2-thumb.jpg" alt="Bockl Blech" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Band</span><p>Bockl Blech</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/rcz-1-large.jpg" data-large-webp="images/konzert/rcz-1-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rcz-1-thumb.webp">
-            <img src="images/konzert/rcz-1-thumb.jpg" alt="RCZ" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>RCZ</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="band" data-large-jpg="images/band/bockl-blech-3-large.jpg" data-large-webp="images/band/bockl-blech-3-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/band/bockl-blech-3-thumb.webp">
-            <img src="images/band/bockl-blech-3-thumb.jpg" alt="Bockl Blech" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Band</span><p>Bockl Blech</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/rcz-2-large.jpg" data-large-webp="images/konzert/rcz-2-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rcz-2-thumb.webp">
-            <img src="images/konzert/rcz-2-thumb.jpg" alt="RCZ" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>RCZ</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="band" data-large-jpg="images/band/timeless-1-large.jpg" data-large-webp="images/band/timeless-1-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/band/timeless-1-thumb.webp">
-            <img src="images/band/timeless-1-thumb.jpg" alt="Timeless" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Band</span><p>Timeless</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="konzert" data-large-jpg="images/konzert/rcz-3-large.jpg" data-large-webp="images/konzert/rcz-3-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rcz-3-thumb.webp">
-            <img src="images/konzert/rcz-3-thumb.jpg" alt="RCZ" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>RCZ</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="band" data-large-jpg="images/band/timeless-2-large.jpg" data-large-webp="images/band/timeless-2-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/band/timeless-2-thumb.webp">
-            <img src="images/band/timeless-2-thumb.jpg" alt="Timeless" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Band</span><p>Timeless</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/rcz-4-large.jpg" data-large-webp="images/konzert/rcz-4-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rcz-4-thumb.webp">
-            <img src="images/konzert/rcz-4-thumb.jpg" alt="RCZ" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>RCZ</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="band" data-large-jpg="images/band/timeless-3-large.jpg" data-large-webp="images/band/timeless-3-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/band/timeless-3-thumb.webp">
-            <img src="images/band/timeless-3-thumb.jpg" alt="Timeless" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Band</span><p>Timeless</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="konzert" data-large-jpg="images/konzert/rcz-5-large.jpg" data-large-webp="images/konzert/rcz-5-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rcz-5-thumb.webp">
-            <img src="images/konzert/rcz-5-thumb.jpg" alt="RCZ" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>RCZ</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/rcz-6-large.jpg" data-large-webp="images/konzert/rcz-6-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rcz-6-thumb.webp">
-            <img src="images/konzert/rcz-6-thumb.jpg" alt="RCZ" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>RCZ</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/rotzloeffl-1-large.jpg" data-large-webp="images/konzert/rotzloeffl-1-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rotzloeffl-1-thumb.webp">
-            <img src="images/konzert/rotzloeffl-1-thumb.jpg" alt="Rotzloeffl" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Rotzloeffl</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="konzert" data-large-jpg="images/konzert/rotzloeffl-2-large.jpg" data-large-webp="images/konzert/rotzloeffl-2-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rotzloeffl-2-thumb.webp">
-            <img src="images/konzert/rotzloeffl-2-thumb.jpg" alt="Rotzloeffl" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Rotzloeffl</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/rotzloeffl-3-large.jpg" data-large-webp="images/konzert/rotzloeffl-3-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rotzloeffl-3-thumb.webp">
-            <img src="images/konzert/rotzloeffl-3-thumb.jpg" alt="Rotzloeffl" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Rotzloeffl</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="konzert" data-large-jpg="images/konzert/rotzloeffl-4-large.jpg" data-large-webp="images/konzert/rotzloeffl-4-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/rotzloeffl-4-thumb.webp">
-            <img src="images/konzert/rotzloeffl-4-thumb.jpg" alt="Rotzloeffl" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Rotzloeffl</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/vogelfrey-1-large.jpg" data-large-webp="images/konzert/vogelfrey-1-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/vogelfrey-1-thumb.webp">
-            <img src="images/konzert/vogelfrey-1-thumb.jpg" alt="Vogelfrey" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Vogelfrey</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="konzert" data-large-jpg="images/konzert/vogelfrey-2-large.jpg" data-large-webp="images/konzert/vogelfrey-2-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/vogelfrey-2-thumb.webp">
-            <img src="images/konzert/vogelfrey-2-thumb.jpg" alt="Vogelfrey" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Vogelfrey</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item reveal" data-category="konzert" data-large-jpg="images/konzert/vogelfrey-3-large.jpg" data-large-webp="images/konzert/vogelfrey-3-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/vogelfrey-3-thumb.webp">
-            <img src="images/konzert/vogelfrey-3-thumb.jpg" alt="Vogelfrey" loading="lazy" width="800" height="533">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Vogelfrey</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/vogelfrey-4-large.jpg" data-large-webp="images/konzert/vogelfrey-4-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/vogelfrey-4-thumb.webp">
-            <img src="images/konzert/vogelfrey-4-thumb.jpg" alt="Vogelfrey" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Vogelfrey</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/vogelfrey-5-large.jpg" data-large-webp="images/konzert/vogelfrey-5-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/vogelfrey-5-thumb.webp">
-            <img src="images/konzert/vogelfrey-5-thumb.jpg" alt="Vogelfrey" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Vogelfrey</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/vogelfrey-6-large.jpg" data-large-webp="images/konzert/vogelfrey-6-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/vogelfrey-6-thumb.webp">
-            <img src="images/konzert/vogelfrey-6-thumb.jpg" alt="Vogelfrey" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Vogelfrey</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/vogelfrey-7-large.jpg" data-large-webp="images/konzert/vogelfrey-7-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/vogelfrey-7-thumb.webp">
-            <img src="images/konzert/vogelfrey-7-thumb.jpg" alt="Vogelfrey" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Vogelfrey</p></figcaption>
-        </figure>
-
-        <figure class="gallery-item tall reveal" data-category="konzert" data-large-jpg="images/konzert/vogelfrey-8-large.jpg" data-large-webp="images/konzert/vogelfrey-8-large.webp">
-          <picture>
-            <source type="image/webp" srcset="images/konzert/vogelfrey-8-thumb.webp">
-            <img src="images/konzert/vogelfrey-8-thumb.jpg" alt="Vogelfrey" loading="lazy" width="800" height="1200">
-          </picture>
-          <figcaption class="gallery-overlay"><span>Konzert</span><p>Vogelfrey</p></figcaption>
-        </figure>
-        <!-- GALLERY:END -->
+      <div class="section-cta reveal">
+        <a href="gallery.html" class="btn">Alle Bilder ansehen</a>
       </div>
     </div>
   </section>

@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
 
-  form.addEventListener('submit', (e) => {
+  if (form) form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const name = form.name.value.trim();
