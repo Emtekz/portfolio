@@ -137,28 +137,60 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowRight') showNext(1);
   });
 
-  /* ---------- Contact form (front-end only) ---------- */
+  /* ---------- Contact form ---------- */
+  // data-endpoint (Formular-Dienst, z. B. https://formspree.io/f/xxxx) steht im <form> in index.html.
+  // Ohne Endpoint öffnet sich stattdessen das Mailprogramm mit vorausgefüllter Nachricht.
   const form = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
 
-  if (form) form.addEventListener('submit', (e) => {
+  function setStatus(text, type) {
+    formStatus.textContent = text;
+    formStatus.className = `form-status ${type}`;
+  }
+
+  if (form) form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = form.name.value.trim();
     const email = form.email.value.trim();
     const message = form.message.value.trim();
+    const subject = form.subject.options[form.subject.selectedIndex].text;
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!name || !email || !message || !emailPattern.test(email)) {
-      formStatus.textContent = 'Bitte fülle alle Felder korrekt aus.';
-      formStatus.className = 'form-status error';
+      setStatus('Bitte fülle alle Felder korrekt aus.', 'error');
       return;
     }
 
-    // No backend connected yet — replace with a real endpoint (e.g. Formspree, EmailJS, own API).
-    formStatus.textContent = `Danke, ${name}! Deine Nachricht wurde vorbereitet — verbinde das Formular noch mit einem Versanddienst.`;
-    formStatus.className = 'form-status success';
-    form.reset();
+    const endpoint = form.dataset.endpoint;
+    const contactEmail = form.dataset.email;
+
+    if (!endpoint) {
+      const body = `${message}\n\n— ${name} (${email})`;
+      window.location.href = `mailto:${contactEmail}?subject=${encodeURIComponent(`Anfrage: ${subject}`)}&body=${encodeURIComponent(body)}`;
+      setStatus('Dein E-Mail-Programm wird geöffnet. Sende die Nachricht dort ab.', 'success');
+      return;
+    }
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    setStatus('Wird gesendet …', 'success');
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name, email, anfrage: subject, message }),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setStatus(`Danke, ${name}! Deine Nachricht ist angekommen — ich melde mich bei dir.`, 'success');
+      form.reset();
+    } catch (err) {
+      console.warn('Formular konnte nicht gesendet werden:', err);
+      setStatus(`Das Senden hat leider nicht geklappt. Schreib mir bitte direkt an ${contactEmail}.`, 'error');
+    } finally {
+      submitButton.disabled = false;
+    }
   });
 
   /* ---------- Footer year ---------- */
