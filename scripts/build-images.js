@@ -1,5 +1,5 @@
-// Liest Rohfotos aus images-src/<kategorie>/, verkleinert & komprimiert sie
-// (WebP + JPEG, in Vorschau- und Großansicht-Größe) nach images/<kategorie>/
+// Liest Rohfotos aus FOTOS-HIER-ABLEGEN/<ordner>/, verkleinert & komprimiert sie
+// (WebP + JPEG, in Vorschau- und Großansicht-Größe) nach bilder-automatisch-erzeugt/<bereich>/
 // und schreibt das fertige HTML in index.html (Highlights) und gallery.html zwischen den
 // Markern <!-- GALLERY:START --> / <!-- GALLERY:END --> bzw.
 // <!-- ABOUT:START --> / <!-- ABOUT:END -->.
@@ -14,8 +14,20 @@ const path = require('path');
 const sharp = require('sharp');
 
 const ROOT = path.resolve(__dirname, '..');
-const SRC_DIR = path.join(ROOT, 'images-src');
-const OUT_DIR = path.join(ROOT, 'images');
+const SRC_NAME = 'FOTOS-HIER-ABLEGEN';
+const SRC_DIR = path.join(ROOT, SRC_NAME);
+const OUT_DIR = path.join(ROOT, 'bilder-automatisch-erzeugt');
+
+// Eingabeordner je Bereich (so heißen die Ordner in FOTOS-HIER-ABLEGEN).
+const SRC_FOLDERS = {
+  hero: 'Startseite/Hintergrund',
+  highlights: 'Startseite/Highlights',
+  about: 'Startseite/Ueber-mich',
+  konzert: 'Galerie/Konzert',
+  band: 'Galerie/Band',
+  portrait: 'Galerie/Portrait',
+};
+const srcPath = key => `${SRC_NAME}/${SRC_FOLDERS[key]}`;
 const INDEX_HTML = path.join(ROOT, 'index.html');
 const GALLERY_HTML = path.join(ROOT, 'gallery.html');
 
@@ -76,7 +88,7 @@ async function renderVariant(inputPath, outBasePath, width, quality) {
 }
 
 async function processCategory(category) {
-  const srcDir = path.join(SRC_DIR, category);
+  const srcDir = path.join(SRC_DIR, SRC_FOLDERS[category]);
   const outDir = path.join(OUT_DIR, category);
   fs.mkdirSync(outDir, { recursive: true });
 
@@ -109,13 +121,13 @@ async function processCategory(category) {
 }
 
 async function processAbout() {
-  const srcDir = path.join(SRC_DIR, 'about');
+  const srcDir = path.join(SRC_DIR, SRC_FOLDERS.about);
   const outDir = path.join(OUT_DIR, 'about');
   const files = listImageFiles(srcDir);
   if (files.length === 0) return null;
 
   if (files.length > 1) {
-    console.warn(`  Hinweis: mehrere Dateien in images-src/about/ gefunden, verwende "${files[0]}".`);
+    console.warn(`  Hinweis: mehrere Dateien in ${srcPath('about')}/ gefunden, verwende "${files[0]}".`);
   }
 
   fs.mkdirSync(outDir, { recursive: true });
@@ -198,13 +210,13 @@ function injectBetweenMarkers(html, marker, replacement, fileName) {
 }
 
 async function processHero() {
-  const srcDir = path.join(SRC_DIR, 'hero');
+  const srcDir = path.join(SRC_DIR, SRC_FOLDERS.hero);
   const outDir = path.join(OUT_DIR, 'hero');
   const files = listImageFiles(srcDir);
   if (files.length === 0) return null;
 
   if (files.length > 1) {
-    console.warn(`  Hinweis: mehrere Dateien in images-src/hero/ gefunden, verwende "${files[0]}".`);
+    console.warn(`  Hinweis: mehrere Dateien in ${srcPath('hero')}/ gefunden, verwende "${files[0]}".`);
   }
 
   fs.mkdirSync(outDir, { recursive: true });
@@ -218,7 +230,7 @@ async function processHero() {
 }
 
 async function main() {
-  console.log('Verarbeite Bilder aus images-src/ ...\n');
+  console.log(`Verarbeite Bilder aus ${SRC_NAME}/ ...\n`);
 
   const queues = [];
   let totalOriginal = 0;
@@ -256,14 +268,14 @@ async function main() {
 
   let indexHtml = fs.readFileSync(INDEX_HTML, 'utf8');
   indexHtml = injectBetweenMarkers(indexHtml, 'HIGHLIGHTS', buildGalleryHtml(highlights.entries,
-    'Lege Fotos in <code>images-src/highlights</code> ab'), 'index.html');
+    `Lege Fotos in <code>${srcPath('highlights')}</code> ab`), 'index.html');
   indexHtml = injectBetweenMarkers(indexHtml, 'HERO', buildHeroHtml(hero), 'index.html');
   indexHtml = injectBetweenMarkers(indexHtml, 'ABOUT', buildAboutHtml(about), 'index.html');
   fs.writeFileSync(INDEX_HTML, indexHtml);
 
   let galleryHtml = fs.readFileSync(GALLERY_HTML, 'utf8');
   galleryHtml = injectBetweenMarkers(galleryHtml, 'GALLERY', buildGalleryHtml(interleave(queues),
-    'Lege Fotos in <code>images-src/konzert</code>, <code>images-src/band</code> bzw. <code>images-src/portrait</code> ab'), 'gallery.html');
+    `Lege Fotos in <code>${srcPath('konzert')}</code>, <code>${srcPath('band')}</code> bzw. <code>${srcPath('portrait')}</code> ab`), 'gallery.html');
   fs.writeFileSync(GALLERY_HTML, galleryHtml);
 
   console.log(`Fertig: ${totalCount} Bild(er) verarbeitet, index.html und gallery.html aktualisiert.`);
