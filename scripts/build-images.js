@@ -69,6 +69,8 @@ function fmtKB(bytes) {
   return `${(bytes / 1024).toFixed(0)} KB`;
 }
 
+const producedFiles = new Set();
+
 async function renderVariant(inputPath, outBasePath, width, quality) {
   const pipeline = sharp(inputPath).rotate().resize({ width, withoutEnlargement: true });
 
@@ -77,6 +79,8 @@ async function renderVariant(inputPath, outBasePath, width, quality) {
 
   const webpInfo = await pipeline.clone().webp({ quality: quality.webp }).toFile(webpPath);
   const jpgInfo = await pipeline.clone().flatten({ background: '#0b0b0d' }).jpeg({ quality: quality.jpg, mozjpeg: true }).toFile(jpgPath);
+  producedFiles.add(path.resolve(webpPath));
+  producedFiles.add(path.resolve(jpgPath));
 
   return {
     webp: path.relative(ROOT, webpPath).replace(/\\/g, '/'),
@@ -229,7 +233,31 @@ async function processHero() {
   return { desktop, mobile };
 }
 
+// Löscht Dateien in der Ausgabe, die in diesem Lauf nicht erzeugt wurden (Reste entfernter/umbenannter Fotos).
+// Erst nach dem erfolgreichen Erzeugen, und Fehler (z. B. von Windows gesperrte Dateien) sind nur eine Warnung.
+function pruneStaleFiles(dir, keep) {
+  let removed = 0;
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      removed += pruneStaleFiles(full, keep);
+    } else if (entry.name !== '.gitkeep' && !keep.has(path.resolve(full))) {
+      try {
+        fs.rmSync(full, { force: true });
+        removed++;
+      } catch (err) {
+        console.warn(`  Hinweis: ${path.relative(ROOT, full)} konnte nicht gelöscht werden (${err.code}).`);
+      }
+    }
+  }
+  return removed;
+}
+
 async function main() {
+  if (!fs.existsSync(SRC_DIR)) {
+    throw new Error(`Ordner "${SRC_NAME}" nicht gefunden. Nichts wurde verändert.`);
+  }
+
   console.log(`Verarbeite Bilder aus ${SRC_NAME}/ ...\n`);
 
   const queues = [];
@@ -277,6 +305,9 @@ async function main() {
   galleryHtml = injectBetweenMarkers(galleryHtml, 'GALLERY', buildGalleryHtml(interleave(queues),
     `Lege Fotos in <code>${srcPath('konzert')}</code>, <code>${srcPath('band')}</code> bzw. <code>${srcPath('portrait')}</code> ab`), 'gallery.html');
   fs.writeFileSync(GALLERY_HTML, galleryHtml);
+
+  const removed = pruneStaleFiles(OUT_DIR, producedFiles);
+  if (removed > 0) console.log(`${removed} veraltete Datei(en) in ${path.basename(OUT_DIR)}/ gelöscht.`);
 
   console.log(`Fertig: ${totalCount} Bild(er) verarbeitet, index.html und gallery.html aktualisiert.`);
   if (totalOriginal > 0) {
