@@ -31,7 +31,7 @@ const srcPath = key => `${SRC_NAME}/${SRC_FOLDERS[key]}`;
 const INDEX_HTML = path.join(ROOT, 'index.html');
 const GALLERY_HTML = path.join(ROOT, 'gallery.html');
 
-const CATEGORIES = ['konzert', 'band', 'portrait'];
+const CATEGORIES = ['portrait', 'band', 'konzert'];
 const CATEGORY_LABELS = { konzert: 'Konzert', band: 'Band', portrait: 'Portrait' };
 const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff', '.svg', '.avif']);
 
